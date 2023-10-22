@@ -35,7 +35,7 @@ fi
 ABI=`/usr/sbin/pkg config abi`
 
 # FreeBSD package source:
-FREEBSD_PACKAGE_URL="https://pkg.freebsd.org/${ABI}/latest/"
+FREEBSD_PACKAGE_URL="https://pkg.freebsd.org/FreeBSD:14:amd64/latest/"
 
 # FreeBSD package list:
 FREEBSD_PACKAGE_LIST_URL="${FREEBSD_PACKAGE_URL}packagesite.pkg"
@@ -113,7 +113,7 @@ tar vfx packagesite.pkg
 
 AddPkg () {
   pkgname=$1
-	base_url=${2:-FREEBSD_PACKAGE_URL}
+	base_url=${2:-$FREEBSD_PACKAGE_URL}
   pkg unlock -yq $pkgname
   pkginfo=`grep "\"name\":\"$pkgname\"" packagesite.yaml`
   pkgvers=`echo $pkginfo | pcregrep -o1 '"version":"(.*?)"' | head -1`
